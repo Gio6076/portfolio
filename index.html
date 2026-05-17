@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Giovani Ebarola | Portfolio</title>
+
+  <!-- Devicon -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+
+  <link rel="stylesheet" href="style.css"/>
+</head>
+
+<body>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="logo">GioBroBro</div>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#certs">Certificates</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <button id="toggleTheme">🌓</button>
+</header>
+
+<!-- HERO -->
+<section id="home" class="hero">
+  <canvas id="bg"></canvas>
+
+  <div class="hero-content">
+    <h1>Hi, I'm <span>Giovani Ebarola</span></h1>
+    <p id="typing"></p>
+
+    <div class="hero-btns">
+      <a href="#projects" class="btn">View Work</a>
+      <a href="#contact" class="btn outline">Contact Me</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section glass reveal">
+  <h2>About Me</h2>
+
+  <div class="about-wrapper">
+
+    <div class="about-img">
+      <img src="images/Profile.JPEG" alt="Giovani Ebarola">
+    </div>
+
+    <div class="about-text">
+      <p>
+        I am a BSIT student passionate about programming, game development,
+        and building real-world systems. I enjoy learning new technologies
+        and applying them in practical projects. I have experience in frontend and backend development, as well as mobile and desktop applications. I am eager to contribute my skills and grow as a developer through meaningful projects and collaborations. I also have a strong interest in networking and cybersecurity, and I am continuously expanding my knowledge in these areas.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="section reveal">
+  <h2>Tech Stack</h2>
+
+  <div class="skills-category">
+
+    <h3>Frontend</h3>
+    <div class="icon-grid">
+      <div class="icon-card"><i class="devicon-html5-plain colored"></i><span>HTML</span></div>
+      <div class="icon-card"><i class="devicon-css3-plain colored"></i><span>CSS</span></div>
+      <div class="icon-card"><i class="devicon-javascript-plain colored"></i><span>JavaScript</span></div>
+    </div>
+
+    <h3>Backend</h3>
+    <div class="icon-grid">
+      <div class="icon-card"><i class="devicon-python-plain colored"></i><span>Python</span></div>
+      <div class="icon-card"><i class="devicon-mysql-plain colored"></i><span>MySQL</span></div>
+    </div>
+
+    <h3>Mobile / Desktop</h3>
+    <div class="icon-grid">
+      <div class="icon-card"><i class="devicon-flutter-plain colored"></i><span>Flutter</span></div>
+      <div class="icon-card"><i class="devicon-dart-plain colored"></i><span>Dart</span></div>
+    </div>
+
+    <h3>Other</h3>
+    <div class="icon-grid">
+      <div class="icon-card"><i class="devicon-linux-plain colored"></i><span>Linux</span></div>
+      <div class="icon-card"><i class="devicon-networkx-plain colored"></i><span>Networking</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="section reveal">
+
+  <h2>Featured Projects</h2>
+
+  <div class="grid">
+
+    <!-- DEADTRIALS (FEATURED FIRST) -->
+    <div class="card project featured" onclick="openModal('DeadTrials')">
+      <div class="badge">Featured</div>
+      <div class="project-preview">
+        <img src="images/DeadTrials/1.png" />
+      </div>
+      <h3>DeadTrials</h3>
+      <p>Game development project with gameplay systems.</p>
+    </div>
+
+    <!-- DIGIDOCS -->
+    <div class="card project featured" onclick="openModal('DigiDocs')">
+      <div class="badge">Featured</div>
+      <div class="project-preview">
+        <img src="images/DigiDocs/Login.png" />
+      </div>
+      <h3>DigiDocs</h3>
+      <p>Document management system with admin dashboard.</p>
+    </div>
+
+  </div>
+
+  <h2 style="margin-top:80px;">Other Projects</h2>
+
+  <div class="grid">
+
+    <div class="card project" onclick="openModal('FloodFacts')">
+      <div class="project-preview">
+        <img src="images/FloodFacts/LandingPage.png" />
+      </div>
+      <h3>FloodFacts</h3>
+      <p>Awareness platform with quizzes and preparedness guides.</p>
+    </div>
+
+    <div class="card project" onclick="openModal('Ebarola_Student_Information')">
+      <div class="project-preview">
+        <img src="images/Ebarola_Student_Information/LandingPage.png" />
+      </div>
+      <h3>Student Information</h3>
+      <p>Student records system for registration and profiles.</p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- CERTIFICATES -->
+<section id="certs" class="section reveal">
+  <h2>Certificates</h2>
+
+  <div class="grid">
+    <div class="card project" onclick="openModal('Networking_Basics')">
+      <div class="project-preview">
+        <img src="images/Certificates/Networking_Basics_certificate.png" />
+      </div>
+      <h3>Networking Basics</h3>
+    </div>
+
+    <div class="card project" onclick="openModal('CCNA_Intro')">
+      <div class="project-preview">
+        <img src="images/Certificates/CCNA-_Introduction_to_Networks_certificate.png" />
+      </div>
+      <h3>CCNA Intro</h3>
+    </div>
+
+    <div class="card project" onclick="openModal('PacketTracer')">
+      <div class="project-preview">
+        <img src="images/Certificates/Getting_Started_with_Cisco_Packet_Tracer_certificate.png" />
+      </div>
+      <h3>Packet Tracer</h3>
+    </div>
+
+    <div class="card project" onclick="openModal('Python_Essentials_2')">
+      <div class="project-preview">
+        <img src="images/Certificates/Python_Essentials_2_certificate.png" />
+      </div>
+      <h3>Python Essentials</h3>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT (NO IMAGE) -->
+<section id="contact" class="section glass reveal">
+  <h2>Contact</h2>
+
+  <div class="contact-wrapper">
+    <div class="contact-info">
+      <p>Email: <a href="mailto:gebarola@gmail.com">gebarola@gmail.com</a></p>
+      <p>GitHub: <a href="https://github.com/Gio6076" target="_blank">github.com/Gio6076</a></p>
+      <p>LinkedIn: <a href="https://linkedin.com/in/ebarola-gio-giovani" target="_blank">Ebarola (Gio) Giovani</a></p>
+      <p>Contact Number: 0946-165-6076</p>
+      <p>Address: Cavite, Philippines</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Giovani Ebarola</p>
+</footer>
+
+<!-- MODAL -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span onclick="closeModal()" class="close">&times;</span>
+    <h2 id="modalTitle"></h2>
+    <p id="modalDesc"></p>
+    <div id="modalViewer" class="modal-viewer"></div>
+    <div id="modalGallery" class="gallery"></div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
