@@ -7,6 +7,15 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; script-src 'self' 'unsafe-inline'; font-src 'self' https://cdn.jsdelivr.net;">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Giovani Ebarola | Portfolio</title>
+  <meta name="description" content="Portfolio of Giovani Ebarola, a BS Information Technology student building projects across networking, infrastructure, software development, data, and cybersecurity foundations.">
+  <link rel="canonical" href="https://giovani-ebarola.vercel.app/">
+  <meta property="og:title" content="Giovani Ebarola | BS Information Technology Student">
+  <meta property="og:description" content="Projects and technical work across networking, infrastructure, software development, data, and cybersecurity foundations.">
+  <meta property="og:url" content="https://giovani-ebarola.vercel.app/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Giovani Ebarola | BS Information Technology Student">
+  <meta name="twitter:description" content="Projects and technical work across networking, infrastructure, software development, data, and cybersecurity foundations.">
 
   <!-- Security Headers via Vercel Config -->
   <!-- Devicon -->
@@ -21,7 +30,12 @@
 <header class="nav">
   <div class="logo">Giovani Paulo</div>
 
-  <nav>
+  <button id="mobileMenuToggle" class="mobile-menu-toggle" type="button" aria-controls="mainNav" aria-expanded="false">
+    <span class="menu-icon" aria-hidden="true">☰</span>
+    <span class="sr-only">Open navigation menu</span>
+  </button>
+
+  <nav id="mainNav" aria-label="Primary navigation">
     <a href="#home">Home</a>
     <a href="#about">About</a>
     <a href="#skills">Skills</a>
@@ -30,16 +44,17 @@
     <a href="#contact">Contact</a>
   </nav>
 
-  <button id="toggleTheme">🌓</button>
+  <button id="toggleTheme" type="button" aria-pressed="false" aria-label="Switch to light theme">🌓</button>
 </header>
 
+<main>
 <!-- HERO -->
-<section id="home" class="hero">
-  <canvas id="bg"></canvas>
+<section id="home" class="hero" aria-labelledby="hero-title">
 
   <div class="hero-content">
-    <h1>Hi, I'm <span>Giovani Ebarola</span></h1>
+    <h1 id="hero-title">Hi, I'm <span>Giovani Ebarola</span></h1>
     <p id="typing"></p>
+    <p class="hero-summary">A portfolio of hands-on technical work built while preparing for internships, OJT, and entry-level IT roles.</p>
 
     <div class="hero-btns">
       <a href="#projects" class="btn">View Work</a>
@@ -60,9 +75,12 @@
 
     <div class="about-text">
       <p>
-        I am a BSIT student passionate about programming, game development,
-        and building real-world systems. I enjoy learning new technologies
-        and applying them in practical projects. I have experience in frontend and backend development, as well as mobile and desktop applications. I am eager to contribute my skills and grow as a developer through meaningful projects and collaborations. I also have a strong interest in networking and cybersecurity, and I am continuously expanding my knowledge in these areas.
+        I am a BS Information Technology student learning through hands-on projects
+        across networking, infrastructure, software development, and data. I enjoy
+        building complete systems rather than only following tutorials, from interfaces
+        and applications to monitoring workflows. My current direction is deepening my
+        understanding of networking and infrastructure while continuing to develop my
+        software, data, and cybersecurity foundations.
       </p>
     </div>
 
@@ -82,9 +100,13 @@
       <div class="icon-card"><i class="devicon-javascript-plain colored"></i><span>JavaScript</span></div>
     </div>
 
-    <h3>Backend</h3>
+    <h3>Monitoring / Backend</h3>
     <div class="icon-grid">
+      <div class="icon-card"><span>Next.js</span></div>
+      <div class="icon-card"><span>TypeScript</span></div>
       <div class="icon-card"><i class="devicon-python-plain colored"></i><span>Python</span></div>
+      <div class="icon-card"><span>FastAPI</span></div>
+      <div class="icon-card"><span>PostgreSQL</span></div>
       <div class="icon-card"><i class="devicon-mysql-plain colored"></i><span>MySQL</span></div>
     </div>
 
@@ -94,10 +116,10 @@
       <div class="icon-card"><i class="devicon-dart-plain colored"></i><span>Dart</span></div>
     </div>
 
-    <h3>Other</h3>
+    <h3>Systems / Networking</h3>
     <div class="icon-grid">
       <div class="icon-card"><i class="devicon-linux-plain colored"></i><span>Linux</span></div>
-      <div class="icon-card"><i class="devicon-networkx-plain colored"></i><span>Networking</span></div>
+      <div class="icon-card"><span>Networking</span></div>
     </div>
 
   </div>
@@ -110,25 +132,38 @@
 
   <div class="grid">
 
-    <!-- DEADTRIALS (FEATURED FIRST) -->
-    <div class="card project featured" onclick="openModal('DeadTrials')">
+    <article class="card project featured noc-project">
       <div class="badge">Featured</div>
-      <div class="project-preview">
-        <img src="images/DeadTrials/1.png" />
+      <div class="project-content">
+        <p class="project-kicker">Primary featured project</p>
+        <h3>NOC Monitoring Platform</h3>
+        <p>A full-stack network and infrastructure monitoring project with a Next.js dashboard, FastAPI monitoring agents, an independent collector, PostgreSQL persistence, persistent alert lifecycle, historical monitoring, and coverage-aware reliability analytics.</p>
+        <div class="project-context">
+          <p><strong>Public demo:</strong> deterministic simulated enterprise infrastructure with private persisted monitoring intentionally disabled.</p>
+          <p><strong>Private lab:</strong> real host, network, and configured HTTP/TCP service telemetry with agents, persistence, historical observations, alert lifecycle, and analytics.</p>
+        </div>
+        <div class="project-tech" aria-label="NOC Monitoring Platform technologies">
+          <span>Next.js</span><span>TypeScript</span><span>FastAPI</span><span>Python</span><span>PostgreSQL</span>
+        </div>
+        <div class="project-actions">
+          <a class="btn small-btn" href="https://noc-dashboard-theta.vercel.app/" target="_blank" rel="noopener noreferrer">Live Demo</a>
+          <a class="btn small-btn outline" href="https://github.com/Gio6076/noc-dashboard" target="_blank" rel="noopener noreferrer">Dashboard Code</a>
+          <a class="btn small-btn outline" href="https://github.com/Gio6076/noc-monitor-agent" target="_blank" rel="noopener noreferrer">Agent Code</a>
+        </div>
       </div>
-      <h3>DeadTrials</h3>
-      <p>Game development project with gameplay systems.</p>
-    </div>
+    </article>
 
     <!-- DIGIDOCS -->
-    <div class="card project featured" onclick="openModal('DigiDocs')">
-      <div class="badge">Featured</div>
+    <article class="card project" data-project="DigiDocs">
       <div class="project-preview">
-        <img src="images/DigiDocs/Login.png" />
+        <img src="images/DigiDocs/Login.png" alt="DigiDocs login screen" />
       </div>
-      <h3>DigiDocs</h3>
-      <p>Document management system with admin dashboard.</p>
-    </div>
+      <div class="project-content">
+        <h3>DigiDocs</h3>
+        <p>Document management system with admin and user dashboards, account administration, audit logs, calendar features, file viewing, and notes.</p>
+        <button class="project-trigger" type="button">View project screens</button>
+      </div>
+    </article>
 
   </div>
 
@@ -136,21 +171,38 @@
 
   <div class="grid">
 
-    <div class="card project" onclick="openModal('FloodFacts')">
+    <article class="card project" data-project="FloodFacts">
       <div class="project-preview">
-        <img src="images/FloodFacts/LandingPage.png" />
+        <img src="images/FloodFacts/LandingPage.png" alt="FloodFacts landing page" />
       </div>
-      <h3>FloodFacts</h3>
-      <p>Awareness platform with quizzes and preparedness guides.</p>
-    </div>
+      <div class="project-content">
+        <h3>FloodFacts</h3>
+        <p>Awareness platform with community stories, quizzes, preparedness guides, and story submission screens.</p>
+        <button class="project-trigger" type="button">View project screens</button>
+      </div>
+    </article>
 
-    <div class="card project" onclick="openModal('Ebarola_Student_Information')">
+    <article class="card project" data-project="Ebarola_Student_Information">
       <div class="project-preview">
-        <img src="images/Ebarola_Student_Information/LandingPage.png" />
+        <img src="images/Ebarola_Student_Information/LandingPage.png" alt="Student Information landing page" />
       </div>
-      <h3>Student Information</h3>
-      <p>Student records system for registration and profiles.</p>
-    </div>
+      <div class="project-content">
+        <h3>Student Information</h3>
+        <p>Student records system with registration, login, and student profile screens.</p>
+        <button class="project-trigger" type="button">View project screens</button>
+      </div>
+    </article>
+
+    <article class="card project" data-project="DeadTrials">
+      <div class="project-preview">
+        <img src="images/DeadTrials/1.png" alt="DeadTrials game project screenshot" />
+      </div>
+      <div class="project-content">
+        <h3>DeadTrials</h3>
+        <p>Game development project with gameplay systems, kept as supporting work.</p>
+        <button class="project-trigger" type="button">View project screens</button>
+      </div>
+    </article>
 
   </div>
 
@@ -161,33 +213,33 @@
   <h2>Certificates</h2>
 
   <div class="grid">
-    <div class="card project" onclick="openModal('Networking_Basics')">
+    <article class="card project" data-project="Networking_Basics">
       <div class="project-preview">
-        <img src="images/Certificates/Networking_Basics_certificate.png" />
+        <img src="images/Certificates/Networking_Basics_certificate.png" alt="Networking Basics certificate" />
       </div>
-      <h3>Networking Basics</h3>
-    </div>
+      <div class="project-content"><h3>Cisco Networking Basics</h3><button class="project-trigger" type="button">View certificate</button></div>
+    </article>
 
-    <div class="card project" onclick="openModal('CCNA_Intro')">
+    <article class="card project" data-project="CCNA_Intro">
       <div class="project-preview">
-        <img src="images/Certificates/CCNA-_Introduction_to_Networks_certificate.png" />
+        <img src="images/Certificates/CCNA-_Introduction_to_Networks_certificate.png" alt="CCNA Introduction to Networks certificate" />
       </div>
-      <h3>CCNA Intro</h3>
-    </div>
+      <div class="project-content"><h3>CCNA: Introduction to Networks</h3><button class="project-trigger" type="button">View certificate</button></div>
+    </article>
 
-    <div class="card project" onclick="openModal('PacketTracer')">
+    <article class="card project" data-project="PacketTracer">
       <div class="project-preview">
-        <img src="images/Certificates/Getting_Started_with_Cisco_Packet_Tracer_certificate.png" />
+        <img src="images/Certificates/Getting_Started_with_Cisco_Packet_Tracer_certificate.png" alt="Getting Started with Cisco Packet Tracer certificate" />
       </div>
-      <h3>Packet Tracer</h3>
-    </div>
+      <div class="project-content"><h3>Getting Started with Cisco Packet Tracer</h3><button class="project-trigger" type="button">View certificate</button></div>
+    </article>
 
-    <div class="card project" onclick="openModal('Python_Essentials_2')">
+    <article class="card project" data-project="Python_Essentials_2">
       <div class="project-preview">
-        <img src="images/Certificates/Python_Essentials_2_certificate.png" />
+        <img src="images/Certificates/Python_Essentials_2_certificate.png" alt="Python Essentials 2 certificate" />
       </div>
-      <h3>Python Essentials</h3>
-    </div>
+      <div class="project-content"><h3>Python Essentials 2</h3><button class="project-trigger" type="button">View certificate</button></div>
+    </article>
   </div>
 </section>
 
@@ -198,9 +250,8 @@
   <div class="contact-wrapper">
     <div class="contact-info">
       <p>Email: <a href="mailto:gebarola@gmail.com">gebarola@gmail.com</a></p>
-      <p>GitHub: <a href="https://github.com/Gio6076" target="_blank">github.com/Gio6076</a></p>
-      <p>LinkedIn: <a href="https://linkedin.com/in/ebarola-gio-giovani" target="_blank">Ebarola (Gio) Giovani</a></p>
-      <p>Contact Number: 0946-165-6076</p>
+      <p>GitHub: <a href="https://github.com/Gio6076" target="_blank" rel="noopener noreferrer">github.com/Gio6076</a></p>
+      <p>LinkedIn: <a href="https://linkedin.com/in/ebarola-gio-giovani" target="_blank" rel="noopener noreferrer">Ebarola (Gio) Giovani</a></p>
       <p>Address: Cavite, Philippines</p>
     </div>
   </div>
@@ -211,15 +262,17 @@
 </footer>
 
 <!-- MODAL -->
-<div id="modal" class="modal">
+<div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDesc" hidden>
   <div class="modal-content">
-    <span onclick="closeModal()" class="close">&times;</span>
+    <button type="button" class="close" aria-label="Close project viewer">&times;</button>
     <h2 id="modalTitle"></h2>
     <p id="modalDesc"></p>
     <div id="modalViewer" class="modal-viewer"></div>
     <div id="modalGallery" class="gallery"></div>
   </div>
 </div>
+
+</main>
 
 <script src="script.js"></script>
 </body>
