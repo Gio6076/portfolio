@@ -106,27 +106,38 @@ const projects = {
       "images/FloodFacts/StorySubmission.png"
     ]
   },
-  Networking_Basics: {
-    title: "Cisco Networking Basics",
-    desc: "Networking Basics certificate.",
-    images: ["images/Certificates/Networking_Basics_certificate.png"]
-  },
-  CCNA_Intro: {
-    title: "CCNA: Introduction to Networks",
-    desc: "CCNA Introduction to Networks certificate.",
-    images: ["images/Certificates/CCNA-_Introduction_to_Networks_certificate.png"]
-  },
-  PacketTracer: {
-    title: "Getting Started with Cisco Packet Tracer",
-    desc: "Getting Started with Cisco Packet Tracer certificate.",
-    images: ["images/Certificates/Getting_Started_with_Cisco_Packet_Tracer_certificate.png"]
-  },
-  Python_Essentials_2: {
-    title: "Python Essentials 2",
-    desc: "Python Essentials 2 certificate.",
-    images: ["images/Certificates/Python_Essentials_2_certificate.png"]
-  }
 };
+
+const credentials = [
+  {
+    key: "introduction-to-cybersecurity",
+    title: "Introduction to Cybersecurity",
+    issuer: "Cisco Networking Academy",
+    preview: "images/certificates/previews/introduction-to-cybersecurity.png",
+    pdf: "images/certificates/Introduction_to_Cybersecurity_certificate_2023-2-00309-lpunetwork-edu-ph_aee148c5-5dcc-40b0-8df9-7e27dbba8e1b.pdf"
+  },
+  {
+    key: "networking-basics",
+    title: "Networking Basics",
+    issuer: "Cisco Networking Academy",
+    preview: "images/certificates/previews/networking-basics.png",
+    pdf: "images/certificates/Networking_Basics_certificate_2023-2-00309-lpunetwork-edu-ph_da7a601b-9235-4d04-bef1-60127261fc3f.pdf"
+  },
+  {
+    key: "ccna-introduction-to-networks",
+    title: "CCNA: Introduction to Networks",
+    issuer: "Cisco Networking Academy",
+    preview: "images/certificates/previews/ccna-introduction-to-networks.png",
+    pdf: "images/certificates/CCNA-_Introduction_to_Networks_certificate_2023-2-00309-lpunetwork-edu-ph_2353dc8e-5de4-4336-ac66-6131bdb92eff.pdf"
+  },
+  {
+    key: "python-essentials-2",
+    title: "Python Essentials 2",
+    issuer: "Cisco Networking Academy",
+    preview: "images/certificates/previews/python-essentials-2.png",
+    pdf: "images/certificates/Python_Essentials_2_certificate_2023-2-00309-lpunetwork-edu-ph_42d36e9f-9fb0-49ad-bffb-71006343f383.pdf"
+  }
+];
 
 // MODAL GALLERY
 const modal = document.getElementById("modal");
@@ -134,14 +145,23 @@ const modalTitle = document.getElementById("modalTitle");
 const modalDesc = document.getElementById("modalDesc");
 const modalViewer = document.getElementById("modalViewer");
 const modalGallery = document.getElementById("modalGallery");
+const credentialControls = document.getElementById("credentialControls");
+const credentialPdf = document.getElementById("credentialPdf");
+const credentialPrevious = document.getElementById("credentialPrevious");
+const credentialNext = document.getElementById("credentialNext");
+const credentialSequence = document.getElementById("credentialSequence");
 const closeButton = modal.querySelector(".close");
 let currentImages = [];
 let currentIndex = 0;
 let lastTrigger = null;
+let modalType = null;
+let currentCredentialIndex = 0;
 
 function closeModal() {
   modal.hidden = true;
+  modal.classList.remove("credential-modal", "project-modal");
   document.body.classList.remove("modal-open");
+  modalType = null;
   if (lastTrigger) lastTrigger.focus();
 }
 
@@ -150,8 +170,12 @@ function openModal(key, trigger) {
   if (!project) return;
 
   lastTrigger = trigger;
+  modalType = "project";
+  modal.classList.remove("credential-modal");
+  modal.classList.add("project-modal");
   modal.hidden = false;
   document.body.classList.add("modal-open");
+  credentialControls.hidden = true;
   modalTitle.textContent = project.title;
   modalDesc.textContent = project.desc;
   modalViewer.textContent = "";
@@ -192,15 +216,56 @@ function openModal(key, trigger) {
   closeButton.focus();
 }
 
+function openCredentialModal(index, trigger) {
+  const credential = credentials[index];
+  if (!credential) return;
+
+  lastTrigger = trigger;
+  modalType = "credential";
+  modal.classList.remove("project-modal");
+  modal.classList.add("credential-modal");
+  currentCredentialIndex = index;
+  modal.hidden = false;
+  document.body.classList.add("modal-open");
+  modalTitle.textContent = credential.title;
+  modalDesc.textContent = credential.issuer;
+  modalGallery.textContent = "";
+  modalViewer.textContent = "";
+  credentialControls.hidden = false;
+  credentialPdf.href = credential.pdf;
+  credentialSequence.textContent = `${index + 1} / ${credentials.length}`;
+
+  const preview = document.createElement("img");
+  preview.src = credential.preview;
+  preview.alt = `${credential.title} certificate preview`;
+  preview.loading = "eager";
+  modalViewer.appendChild(preview);
+  closeButton.focus();
+}
+
+function navigateCredential(step) {
+  if (modalType !== "credential") return;
+  currentCredentialIndex = (currentCredentialIndex + step + credentials.length) % credentials.length;
+  openCredentialModal(currentCredentialIndex, lastTrigger);
+}
+
 document.querySelectorAll("[data-project]").forEach((card) => {
   const trigger = card.querySelector(".project-trigger");
   trigger.addEventListener("click", () => openModal(card.dataset.project, trigger));
 });
 
+document.querySelectorAll("[data-credential]").forEach((card) => {
+  const trigger = card.querySelector(".credential-trigger");
+  const index = credentials.findIndex((credential) => credential.key === card.dataset.credential);
+  trigger.addEventListener("click", () => openCredentialModal(index, trigger));
+});
+
 closeButton.addEventListener("click", closeModal);
+credentialPrevious.addEventListener("click", () => navigateCredential(-1));
+credentialNext.addEventListener("click", () => navigateCredential(1));
 document.addEventListener("keydown", (event) => {
   if (!modal.hidden && event.key === "Tab") {
-    const focusable = [closeButton, ...modalGallery.querySelectorAll("button")].filter((element) => !element.disabled);
+    const focusable = [...modal.querySelectorAll("button, a[href]")].filter((element) => !element.disabled && !element.hidden && element.offsetParent !== null);
     if (!focusable.length) return;
     const first = focusable[0];
     const last = focusable[focusable.length - 1];
@@ -216,12 +281,20 @@ document.addEventListener("keydown", (event) => {
     if (!modal.hidden) closeModal();
     else if (mainNav.classList.contains("is-open")) closeMenu();
   }
-  if (!modal.hidden && event.key === "ArrowRight") {
+  if (!modal.hidden && modalType === "credential" && event.key === "ArrowRight") {
+    event.preventDefault();
+    navigateCredential(1);
+  }
+  if (!modal.hidden && modalType === "credential" && event.key === "ArrowLeft") {
+    event.preventDefault();
+    navigateCredential(-1);
+  }
+  if (!modal.hidden && modalType === "project" && event.key === "ArrowRight") {
     const next = Math.min(currentIndex + 1, currentImages.length - 1);
     const button = modalGallery.querySelectorAll("button")[next];
     if (button) button.click();
   }
-  if (!modal.hidden && event.key === "ArrowLeft") {
+  if (!modal.hidden && modalType === "project" && event.key === "ArrowLeft") {
     const previous = Math.max(currentIndex - 1, 0);
     const button = modalGallery.querySelectorAll("button")[previous];
     if (button) button.click();
