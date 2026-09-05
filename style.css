@@ -180,6 +180,7 @@ button { font: inherit; }
 .section { padding: 100px 24px; text-align: center; }
 .glass { margin: 20px auto; border: 1px solid var(--border); border-radius: 28px; background: var(--surface); backdrop-filter: blur(16px); }
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; margin-top: 30px; }
+.projects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .card { padding: 26px; border: 1px solid transparent; border-radius: 24px; background: var(--surface); box-shadow: var(--shadow); }
 .card h3 { margin: 16px 0 10px; font-size: 1.3rem; }
 .card p { color: var(--text-muted); line-height: 1.75; }
@@ -202,6 +203,10 @@ button { font: inherit; }
 .badge { position: absolute; top: 14px; right: 14px; padding: 6px 12px; border-radius: 999px; background: var(--accent); color: #000; font-size: 0.75rem; font-weight: bold; }
 .project-link { display: inline-block; margin: 12px 16px 0 0; color: var(--accent); font-weight: 700; text-decoration: none; }
 .project-link:hover { color: var(--accent-strong); text-decoration: underline; }
+.supporting-project { display: flex; flex-direction: column; }
+.supporting-project .project-content { display: flex; flex: 1; flex-direction: column; }
+.supporting-actions { justify-content: flex-start; gap: 16px; margin-top: auto; }
+.supporting-actions .project-link { margin: 12px 0 0; }
 
 /* ABOUT AND SKILLS */
 .about-wrapper { display: flex; align-items: center; justify-content: center; gap: 40px; max-width: 900px; margin: auto; text-align: left; }
@@ -264,6 +269,7 @@ html.js .reveal.active { opacity: 1; transform: translateY(0); }
   .project-actions { flex-direction: column; align-items: stretch; }
   .project-actions .btn { text-align: center; }
   .noc-project { padding: 26px; }
+  .projects-grid { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {
