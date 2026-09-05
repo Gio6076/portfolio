@@ -1,6 +1,6 @@
 document.documentElement.classList.add("js");
 
-const typingText = "BS Information Technology Student | Networking • Infrastructure • Data & Software Development";
+const typingText = "BS Information Technology Student | Networking • Infrastructure • Data Analytics • Cybersecurity • Software Development";
 const typingTarget = document.getElementById("typing");
 let typingIndex = 0;
 
@@ -12,7 +12,11 @@ function type() {
   }
 }
 
-if (typingTarget) type();
+const prefersReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+if (typingTarget) {
+  if (prefersReducedMotion) typingTarget.textContent = typingText;
+  else type();
+}
 
 // THEME
 const themeToggle = document.getElementById("toggleTheme");
@@ -75,39 +79,31 @@ revealSections();
 
 // PROJECT DATA
 const projects = {
+  NOC: {
+    title: "NOC Monitoring Platform",
+    desc: "Full-stack network and infrastructure monitoring with a Next.js dashboard, FastAPI/Python services, an independent collector, PostgreSQL persistence, persistent alerts, historical monitoring, and coverage-aware reliability analytics.",
+    images: ["images/noc/dashboard-overview.png", "images/noc/monitoring-architecture.png"],
+    imageAlts: [
+      "NOC Monitoring Platform dashboard overview showing infrastructure health, service status, alerts, and monitoring metrics",
+      "NOC Monitoring Platform monitoring architecture diagram showing the dashboard, services, collector, database, and monitored infrastructure"
+    ]
+  },
   DigiDocs: {
     title: "DigiDocs",
-    desc: "Documentation system with admin and user dashboards, account administration, audit logs, calendar features, file viewing, and notes.",
+    desc: "Flutter/Dart desktop application with SQLite persistence, document and file workflows, role-based accounts, PBKDF2 password hashing, authorization, notes, calendar, and audit functionality.",
     images: [
       "images/DigiDocs/Login.png", "images/DigiDocs/AccountsAdmin.png", "images/DigiDocs/AdminDashboard.png",
       "images/DigiDocs/AuditLogsAdmin.png", "images/DigiDocs/Calendar.png", "images/DigiDocs/FileOpening.png",
       "images/DigiDocs/Notes.png", "images/DigiDocs/UserDashboard.png"
     ]
   },
-  Ebarola_Student_Information: {
-    title: "Student Information",
-    desc: "Student records app for registration, login, and profile management.",
-    images: [
-      "images/Ebarola_Student_Information/LandingPage.png", "images/Ebarola_Student_Information/LoginPage.png",
-      "images/Ebarola_Student_Information/RegisNewStud.png", "images/Ebarola_Student_Information/StudInfo.png"
-    ]
-  },
   FloodFacts: {
     title: "FloodFacts",
-    desc: "Awareness app with community stories, quizzes, preparedness guides, and story submission screens.",
+    desc: "HTML, CSS, JavaScript, and Bootstrap awareness platform with Firebase Authentication, Cloud Firestore, preparedness guidance, checklists, a flood-safety quiz, and community stories.",
     images: [
       "images/FloodFacts/LandingPage.png", "images/FloodFacts/Login.png", "images/FloodFacts/AboutUs.png",
       "images/FloodFacts/CommunityStories.png", "images/FloodFacts/Preparedness.png", "images/FloodFacts/Quiz.png",
       "images/FloodFacts/StorySubmission.png"
-    ]
-  },
-  DeadTrials: {
-    title: "DeadTrials",
-    desc: "Game development project with gameplay systems.",
-    images: [
-      "images/DeadTrials/2.png", "images/DeadTrials/3.png", "images/DeadTrials/4.png", "images/DeadTrials/5.png",
-      "images/DeadTrials/6.png", "images/DeadTrials/7.png", "images/DeadTrials/8.png", "images/DeadTrials/9.png",
-      "images/DeadTrials/10.png", "images/DeadTrials/11.png", "images/DeadTrials/12.png"
     ]
   },
   Networking_Basics: {
@@ -164,13 +160,14 @@ function openModal(key, trigger) {
   currentIndex = 0;
 
   const mainImage = document.createElement("img");
-  mainImage.alt = `${project.title} screenshot`;
+  mainImage.alt = project.imageAlts?.[0] || `${project.title} screenshot`;
   modalViewer.appendChild(mainImage);
 
   const updateImage = (index) => {
     if (index < 0 || index >= currentImages.length) return;
     currentIndex = index;
     mainImage.src = currentImages[currentIndex];
+    mainImage.alt = project.imageAlts?.[currentIndex] || `${project.title} screenshot ${currentIndex + 1}`;
     modalGallery.querySelectorAll("button").forEach((button, buttonIndex) => {
       button.classList.toggle("active", buttonIndex === currentIndex);
       button.setAttribute("aria-current", buttonIndex === currentIndex ? "true" : "false");
@@ -181,7 +178,7 @@ function openModal(key, trigger) {
     const thumbnail = document.createElement("button");
     thumbnail.type = "button";
     thumbnail.className = "gallery-thumb";
-    thumbnail.setAttribute("aria-label", `View ${project.title} image ${index + 1}`);
+    thumbnail.setAttribute("aria-label", `View ${project.title} image ${index + 1}${project.imageAlts?.[index] ? `: ${project.imageAlts[index]}` : ""}`);
     thumbnail.setAttribute("aria-current", index === 0 ? "true" : "false");
     const thumbnailImage = document.createElement("img");
     thumbnailImage.src = src;
@@ -202,6 +199,19 @@ document.querySelectorAll("[data-project]").forEach((card) => {
 
 closeButton.addEventListener("click", closeModal);
 document.addEventListener("keydown", (event) => {
+  if (!modal.hidden && event.key === "Tab") {
+    const focusable = [closeButton, ...modalGallery.querySelectorAll("button")].filter((element) => !element.disabled);
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  }
   if (event.key === "Escape") {
     if (!modal.hidden) closeModal();
     else if (mainNav.classList.contains("is-open")) closeMenu();
